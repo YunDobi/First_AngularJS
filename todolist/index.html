@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="todolsits">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="./app/app.js"></script>
+  <link rel="stylesheet" href="./style.css">
   <title>Document</title>
 </head>
-<body ng-view>
-  <p>{{1 + 3}}</p>
+<body>
+  <div ng-controller="todolistController">
+    <div ng-include="'header.html'"></div>
+    <input type="text" ng-model="newTodo">
+    <button ng-click="addingTask(newTodo); newTodo = null">add</button>
+    
+    <div ng-repeat="todo in todos" >
+      <li>{{todo}}</li>
+    </div>
+  </div>
   
 </body>
 </html>
