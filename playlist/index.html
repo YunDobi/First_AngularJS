@@ -10,10 +10,13 @@
   <title>practice playlist</title>
 </head>
 <!-- The "ngInit" directive allows you to evaluate an expression in the current scope. -->
-<body ng-init="playlists = ['first', 'second', 'third', 'forth']">
-  <!-- this is 2 way data binding between model and view -->
-  <input type="text" ng-model="favMeat" placeholder="what is your favorite meat?">
-  <!-- created the model whici is favMeat in the input area -->
-  <li ng-repeat="playlist in playlists">{{playlist}}</li>
-</body>
+  <body ng-controller="PlaylistController">
+    <input type="text" ng-model="search">
+    <ul>
+      <li ng-repeat="playlist in playlists | orderBy: 'number' | filter: search">
+        {{playlist.name}} - {{playlist.number | number}}
+      </li>
+    </ul>
+
+  </body>
 </html>
