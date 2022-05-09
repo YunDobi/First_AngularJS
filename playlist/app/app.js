@@ -1,6 +1,44 @@
-let MyPlayListApp = angular.module('myPlayList', []);
+let MyPlayListApp = angular.module('myPlayList', ['ngRoute', 'ngAnimate']);
 
-MyPlayListApp.controller('PlaylistController',["$scope", function($scope) {
+MyPlayListApp.config(['$routeProvider','$locationProvider', function($routeProvider, $locationProvider) {
+
+  // $locationProvider.html6Mode(true);
+
+  $routeProvider
+    .when('/home', {
+      templateUrl: 'views/home.html',
+      controller: 'PlaylistController'
+    })
+    .when('/contact', {
+      templateUrl: 'views/contact.html',
+    })
+    .when('/directory', {
+      templateUrl: 'views/directory.html',
+      controller: 'PlaylistController'
+    })
+    .otherwise ({
+      redirectTo: '/home'
+    });
+
+}]);
+
+MyPlayListApp.directive('randomSong',[function() {
+  return {
+    restrict: 'E',
+    scope: {
+      playlists: '=',
+      title: '='
+    },
+    templateUrl: 'views/random.html',
+    transclude: true,
+    replace: true,
+    controller: function($scope) {
+      $scope.random = Math.floor(Math.random() * 4);
+    }
+  }
+}])
+
+MyPlayListApp.controller('PlaylistController',["$scope", "$http", function($scope, $http) {
   $scope.message = "Hello AngularJS";
 
   $scope.removePlayList = function(playlist) {
@@ -9,31 +47,27 @@ MyPlayListApp.controller('PlaylistController',["$scope", function($scope) {
     console.log($scope.playlists)
   };
 
-  $scope.playlists = [
-    {
-      name: "First-song",
-      artist: "Fhun",
-      number: 1,
+  $scope.addSong = function() {
+    // console.log($scope);
+    $scope.playlists.push({
+      name: $scope.newSong.name,
+      artist: $scope.newSong.artist,
+      number: parseInt($scope.newSong.number),
       playable: true
-    },
-    {
-      name: "Second-song",
-      artist: "Shen",
-      number: 2,
-      playable: true
-    },
-    {
-      name: "Third-song",
-      artist: "Tom",
-      number: 3,
-      playable: false
-    },
-    {
-      name: "Forth-song",
-      artist: "Funky guy",
-      number: 4,
-      playable: true
-    }
-  ];
+    });
+
+    $scope.newSong.name = "";
+    $scope.newSong.artist = "";
+    $scope.newSong.number = "";
+  };
+
+  $scope.removeAll = function() {
+    $scope.playlists = [];
+  };
+
+  $http.get('data/playlists.json')
+    .then(function(data) {
+      $scope.playlists = data.data;
+    });
 
 }]);

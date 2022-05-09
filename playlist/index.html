@@ -5,26 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.8.2/angular-route.js"></script>
+  <script src="https://code.angularjs.org/1.8.2/angular-animate.min.js"></script>
   <script src="./app/app.js"></script>
   <link rel="stylesheet" href="./content/style.css">
   <title>practice playlist</title>
 </head>
   <body>
     <header ng-include="'header.html'"></header>
-    <div class="content">
-      <div ng-controller="PlaylistController">
-        <button ng-click="order = 'name'">Order by Name</button>
-        <button ng-click="order = 'number'">Order by number</button>
-        <input type="text" ng-model="search">
-        <ul>
-          <li ng-repeat="playlist in playlists | orderBy: order | filter: search" ng-show="playlist.playable">
-            <h3>{{playlist.name}} - {{playlist.number | number}}</h3>
-            <div class="remove" ng-click="removePlayList(playlist)">x</div>
-            <span class="artist">{{playlist.artist}} artist</span>
-          </li>
-        </ul>
-      </div>
-
-    </div>
+    <main ng-view></main>
   </body>
 </html>

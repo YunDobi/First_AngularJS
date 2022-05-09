@@ -1,0 +1,21 @@
+[{
+	"name": "First-song",
+	"artist": "Fhun",
+	"number": 1,
+	"playable": true
+}, {
+	"name": "Second-song",
+	"artist": "Shen",
+	"number": 2,
+	"playable": true
+}, {
+	"name": "Third-song",
+	"artist": "Tom",
+	"number": 3,
+	"playable": true
+}, {
+	"name": "Forth-song",
+	"artist": "Funky guy",
+	"number": 4,
+	"playable": true
+}]
