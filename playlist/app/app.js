@@ -26,14 +26,14 @@ MyPlayListApp.directive('randomSong',[function() {
   return {
     restrict: 'E',
     scope: {
-      playlists: '=',
+      todolists: '=',
       title: '='
     },
     templateUrl: 'views/random.html',
     transclude: true,
     replace: true,
     controller: function($scope) {
-      $scope.random = Math.floor(Math.random() * 4);
+      $scope.random = Math.floor(Math.random() * 2);
     }
   }
 }])
@@ -42,32 +42,30 @@ MyPlayListApp.controller('PlaylistController',["$scope", "$http", function($scop
   $scope.message = "Hello AngularJS";
 
   $scope.removePlayList = function(playlist) {
-    let removePlayList = $scope.playlists.indexOf(playlist);
-    $scope.playlists.splice(removePlayList, 1);
-    console.log($scope.playlists)
+    let removePlayList = $scope.todolists.indexOf(playlist);
+    $scope.todolists.splice(removePlayList, 1);
+    console.log($scope.todolists)
   };
 
   $scope.addSong = function() {
     // console.log($scope);
-    $scope.playlists.push({
+    $scope.todolists.push({
       name: $scope.newSong.name,
-      artist: $scope.newSong.artist,
       number: parseInt($scope.newSong.number),
-      playable: true
+      working: true
     });
 
     $scope.newSong.name = "";
-    $scope.newSong.artist = "";
     $scope.newSong.number = "";
   };
 
   $scope.removeAll = function() {
-    $scope.playlists = [];
+    $scope.todolists = [];
   };
 
   $http.get('data/playlists.json')
     .then(function(data) {
-      $scope.playlists = data.data;
+      $scope.todolists = data.data;
     });
 
 }]);

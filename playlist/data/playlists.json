@@ -1,21 +1,9 @@
 [{
-	"name": "First-song",
-	"artist": "Fhun",
+	"name": "Clean my room",
 	"number": 1,
-	"playable": true
+	"working": true
 }, {
-	"name": "Second-song",
-	"artist": "Shen",
+	"name": "Leetcodeing",
 	"number": 2,
-	"playable": true
-}, {
-	"name": "Third-song",
-	"artist": "Tom",
-	"number": 3,
-	"playable": true
-}, {
-	"name": "Forth-song",
-	"artist": "Funky guy",
-	"number": 4,
-	"playable": true
+	"working": true
 }]
